@@ -131,17 +131,17 @@
 
 // filter polyfill
 
-Array.prototype.myFilter = function(callback){
-    var result = [];
+// Array.prototype.myFilter = function(callback){
+//     var result = [];
 
-    for(var i = 0; i < this.length; i++){
-        if(callback(this[i] , i)){
-            result.push(this[i])
-        }
-    }
+//     for(var i = 0; i < this.length; i++){
+//         if(callback(this[i] , i)){
+//             result.push(this[i])
+//         }
+//     }
 
-    return result;
-}
+//     return result;
+// }
 
 // push
 
@@ -156,6 +156,103 @@ Array.prototype.myFilter = function(callback){
 // ... rest parameter
 // ... spread operator
 
-function test(...arg){
-    console.log(arg)
-}
+// function test(...arg){
+//     console.log(arg)
+// }
+
+// DOM manipulation - Document Object Model
+// const headingTag = document.querySelector('.title'); 
+// attribute
+
+// headingTag.style.color = 'rgb(255 , 0 , 0)';
+// headingTag.style.backgroundColor = 'rgb(255, 255, 0)';
+
+// class => className
+// for => htmlFor
+
+// camel case => background-color , backgroundColor
+
+// classList
+
+
+// Node prev, next
+// 
+
+// const shineElement = document.createElement('div')
+// shineElement.setAttribute('class' , 'box');
+
+// headingTag.append(shineElement)
+
+// insertAdjacentHTML
+
+// headingTag.insertAdjacentHTML('afterbegin' , `
+//     <div class='box'>hi</div>
+// `) 
+// headingTag.insertAdjacentHTML('afterbegin' , `
+//     <div class='box'>another box</div>
+// `) 
+// position , tag
+// beforebegin
+// afterbegin
+// beforeend
+// afterend
+
+const titles = document.querySelector('.title');
+const garchguud = document.getElementsByClassName('title');
+const paragraph = document.getElementById('text');
+
+// dom event listener
+
+// paragraph.onclick = printSth // touch
+
+// function printSth (arg){
+//     const capLetter = /[A-Z]/;
+//     if(capLetter.test(arg)){
+//         console.log('tom useg bichigdlee')
+//     }
+// }
+
+// inpt.oninput = function
+
+// paragraph.addEventListener('click' , function(event){
+//     eventFunction();
+//     console.log(event)
+// }) // event , callback
+
+// function eventFunction(){
+//     console.log('hi hfdhkj')
+// }
+
+// document.addEventListener('click', function(event){
+//     console.log(event.target)
+// })
+
+// document.addEventListener('keydown' , e => {
+//     console.log(`Ta ${e.code} товчыг дарлаа`)
+// })
+
+// document.addEventListener('keyup' , e => {
+//     console.log(`Ta ${e.code} товчлуур дээрээс хуруугаа авлаа`)
+// })
+
+// mousedown , mousemove , mouseup, mouseover , mouseenter , mouseleave
+
+// mouseenter , mouseleave eventiig ashiglaad hover hiih
+
+// document.addEventListener('mouseover' , (e) => {
+//     if(e.target.id === 'text'){
+//         e.target.classList.add('hover')
+//     }
+// })
+
+// document.addEventListener('mouseout' , (e) => {
+//     if(e.target.id === 'text'){
+//         e.target.classList.remove('hover')
+//     }
+// })
+
+const users = []
+// 1. хэрэглэгч бүртгэх форм үүсгэх /овог нэр , имэйл , нууц үг , id/
+// 2. хэрэглэгийн объект үүсгээд users массив руу push хийж нэмэх
+// 3. 5ш хэрэглэгч бүртгээд local storage дээр хадгалах.
+// 4. веб хуудас ачааллах үед бүртгэлтэй 5 хэрэглэгчийн датаг users объект руу авдаг байх

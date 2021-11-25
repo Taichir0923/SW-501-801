@@ -1,0 +1,39 @@
+/* 
+selector {
+    property: value
+}
+
+type , class , tag , id , pseudo class , pseudo-element
+*/
+/* .text:hover {
+
+}
+.text:active {
+
+}
+
+.text:visited {
+    color: red;
+}
+
+.text:nth-child(3)
+
+#title:target {
+    color: red;
+}
+
+#title::before {
+    content: 'hi';
+}
+
+#title::after {
+    content: 'hi';
+} */
+/* 
+input[type='password']{
+    border: 3px solid red;
+} */
+.hover {
+    transition: .3s;
+    color: yellow;
+}
