@@ -197,9 +197,9 @@
 // beforeend
 // afterend
 
-const titles = document.querySelector('.title');
-const garchguud = document.getElementsByClassName('title');
-const paragraph = document.getElementById('text');
+// const titles = document.querySelector('.title');
+// const garchguud = document.getElementsByClassName('title');
+// const paragraph = document.getElementById('text');
 
 // dom event listener
 
@@ -251,8 +251,114 @@ const paragraph = document.getElementById('text');
 //     }
 // })
 
-const users = []
+// const users = []
 // 1. хэрэглэгч бүртгэх форм үүсгэх /овог нэр , имэйл , нууц үг , id/
 // 2. хэрэглэгийн объект үүсгээд users массив руу push хийж нэмэх
 // 3. 5ш хэрэглэгч бүртгээд local storage дээр хадгалах.
 // 4. веб хуудас ачааллах үед бүртгэлтэй 5 хэрэглэгчийн датаг users объект руу авдаг байх
+
+// Asnychronous JS and Fetch API
+
+// Promise => resolve , reject;
+// Fetch
+
+// const username = document.querySelector('#username');
+// const number = document.querySelector('#number');
+// const email = document.querySelector('#email');
+// const password = document.querySelector('#password');
+// const btn = document.querySelector('#btn');
+
+// let users = [];
+
+// window.addEventListener('load' , () => {
+//     if(localStorage['users']){
+//         users = JSON.parse(localStorage['users'])
+//     } else {
+//         users = [];
+//     }
+// })
+
+// btn.addEventListener('click' , (e) => {
+//     e.preventDefault();
+//     if(username.value.trim() !== '' && number.value.trim() !== '' && email.value.trim() !== '' && password.value !== ''){
+//         const user = {
+//             username: username.value,
+//             email: email.value,
+//             number: number.value,
+//             password: password.value
+//         }
+//         users.push(user);
+//         localStorage.setItem("users" , JSON.stringify(users))
+//     }
+// })
+
+// fetch , axios
+// url
+
+// req - server luu huselt ilgeeh
+// res - serverees irj bga hariu
+
+// callback 
+
+// Asynchronous JS
+// async await
+
+// fetch('https://jsonplaceholder.typicode.com/users')
+//     .then(response => {
+//         if(response.status === 404){
+//             throw new Error("Таны хандсан хуудас олдсонгүй... 404")
+//         }
+//         return response.json(); 
+//     })
+//     .then(result => {
+//         console.log(result)
+//     })
+//     .catch(error => {
+//         console.log(error.message)
+//     })
+
+// try catch
+const userContainer = document.querySelector('.container'); 
+
+const getData = async () => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+        if(response.status === 404){
+            throw new Error('404 huudas oldsongui')
+        }
+
+        const result = await response.json();
+    
+        userContainer.innerHTML = '';
+
+        result.forEach(user => {
+            userContainer.insertAdjacentHTML('beforeend' , `
+                <div class="flex py-3 px-4 hover:bg-gray-100 transition duration-400 rounded-md w-full items-center justify-between">
+                <p>${user.name}</p>
+                <div class="flex items-center gap-4">
+                    <button>todo</button>
+                    <button>posts</button>
+                    <button>albuls</button>
+                </div>
+            `)
+        })
+
+    } catch (error){
+        console.log(error.message)
+    }
+}
+getData()
+
+// f1 - async
+// f2
+// f3
+// f4 - cb f1
+
+// alert('alert1')
+// console.log('fjdfklk')
+// alert('alert2')
+// alert('alert3')
+
+// Хэрэглэгчдийн нэрсийг дэлгэцэнд хэвлэх
+

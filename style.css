@@ -33,7 +33,37 @@ type , class , tag , id , pseudo class , pseudo-element
 input[type='password']{
     border: 3px solid red;
 } */
-.hover {
+/* .hover {
     transition: .3s;
     color: yellow;
+} */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(241, 236, 236);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 380px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.form input {
+    width: 100%;
+    padding: 10px 1rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: rgb(241, 236, 236);
 }
