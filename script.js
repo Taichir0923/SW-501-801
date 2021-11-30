@@ -340,7 +340,7 @@ const getData = async () => {
                     <div class="flex items-center gap-4">
                         <button id="todos">todo</button>
                         <button>posts</button>
-                        <button>albuls</button>
+                        <button>albums</button>
                     </div>
                 </div>
             `)
@@ -374,3 +374,9 @@ document.addEventListener('click' , async (e) => {
         console.log(todos);
     }
 })
+
+// todos , albums , posts 3 товчын аль нэгийг дарах үед шинэ цонх руу үсэрч орох
+
+// тухайн цонхонд сонгосон ( todos , posts , albums ) датанууд харагддаг байх
+
+// location object ashiglah
