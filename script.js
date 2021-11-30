@@ -332,14 +332,16 @@ const getData = async () => {
     
         userContainer.innerHTML = '';
 
-        result.forEach(user => {
+        result.forEach((user) => {
             userContainer.insertAdjacentHTML('beforeend' , `
                 <div class="flex py-3 px-4 hover:bg-gray-100 transition duration-400 rounded-md w-full items-center justify-between">
-                <p>${user.name}</p>
-                <div class="flex items-center gap-4">
-                    <button>todo</button>
-                    <button>posts</button>
-                    <button>albuls</button>
+                    <p>${user.name}</p>
+                    <input hidden value=${user.id}>
+                    <div class="flex items-center gap-4">
+                        <button id="todos">todo</button>
+                        <button>posts</button>
+                        <button>albuls</button>
+                    </div>
                 </div>
             `)
         })
@@ -362,3 +364,13 @@ getData()
 
 // Хэрэглэгчдийн нэрсийг дэлгэцэнд хэвлэх
 
+
+// github.com/taichir0923/SW-501-801
+document.addEventListener('click' , async (e) => {
+    if(e.target.id === 'todos'){
+        const userId = e.target.parentNode.previousElementSibling.value;
+        const todoRes = await fetch(`https://jsonplaceholder.typicode.com/todos/?userId=${userId}`);
+        const todos = await todoRes.json();
+        console.log(todos);
+    }
+})
