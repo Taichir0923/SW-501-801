@@ -1,2 +1,4 @@
 1. 5ш хэрэглэгч үүсгэх
 2. Хэрэглэгч тус бүрд 3ш пост үүсгэх.
+comparision operators
+logical operators
