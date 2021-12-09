@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> <%= pageTitle %> </title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body>   
+        <div class="container mx-auto grid grid-cols-3 gap-4">
+            <% for(user of users){ %>
+                <div class="h-56 rounded-xl bg-indigo-400 text-white flex justify-center items-center flex-col">
+                    <h3> <%= user.name %> </h3>
+                    <p><%= user.email %></p>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>
