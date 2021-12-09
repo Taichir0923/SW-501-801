@@ -5,8 +5,6 @@ const mainController = require('../controllers/main');
 
 route.get('/' , mainController.homeController);
 
-route.get('/about' , (req, res) => {
-
-})
+route.get('/user/:id' , mainController.userController)
 
 module.exports = route;

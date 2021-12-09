@@ -10,6 +10,18 @@ class Main {
             });
         });
     }
+
+    userController(req, res){
+        const id = +req.params.id;
+
+        fs.readFile(`${__dirname}/../data/users.json` , 'utf-8' , (err , data) => {
+            const user = JSON.parse(data).find(usr => usr.id === id);
+            res.render('user' , {
+                usr: user
+            });
+        });
+    }
 }
 
 module.exports = new Main();
+// Profile
