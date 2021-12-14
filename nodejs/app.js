@@ -2,9 +2,13 @@ const express = require('express');
 
 const app = express();
 const mainRoute = require('./routes/main');
+const bp = require('body-parser');
+
 
 app.set('view engine' , 'ejs');
 app.set('views' , 'pages');
+
+app.use(bp.urlencoded({extended: false}))
 
 app.get("/about" , (req, res) => {
     res.send('Bidnii tuhai')
