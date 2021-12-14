@@ -17,26 +17,31 @@ route.post('/getUserData' , (req , res) => {
     const {username , email , password} = req.body;
     let users;
 
-    const userlist = fs.readFileSync(`${__dirname}/../data/users.json` , 'utf-8')
-
-    if(!userlist){
-        users = [];
-    } else {
+    if(fs.existsSync(`${__dirname}/../data/users.json`)){
+        const userlist = fs.readFileSync(`${__dirname}/../data/users.json` , 'utf-8')
         users = [...JSON.parse(userlist)]
+    } else {
+        users = []
     }
+
+    const existingUser = users.find(usr => usr.email === email);
+
+    if(!existingUser){
+        const user = new User(username , email , password);
+        users.push(user);
     
-    const user = new User(username , email , password);
-    users.push(user);
-
-    fs.writeFile(`${__dirname}/../data/users.json` , JSON.stringify(users) , (err) => {
-        if(!err){
-            console.log('хэрэглэгч үүслээ...')
-        } else {
-            console.log(err)
-        }
-    })
-
-    res.redirect('/form')
+        fs.writeFile(`${__dirname}/../data/users.json` , JSON.stringify(users) , (err) => {
+            if(!err){
+                console.log('хэрэглэгч үүслээ...')
+                res.redirect('/form')
+            } else {
+                console.log(err)
+            }
+        })
+    } else {
+        res.redirect('/form');
+        console.log('Имэйл бүртгэлтэй байна...')
+    }
 })
 
 module.exports = route;
