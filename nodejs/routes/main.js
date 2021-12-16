@@ -15,33 +15,17 @@ route.get('/form' , (req , res) => {
 
 route.post('/getUserData' , (req , res) => {
     const {username , email , password} = req.body;
-    let users;
+    const user = new User(username , email , password);
+    user.save(email);
+    res.redirect('/form')
+})
 
-    if(fs.existsSync(`${__dirname}/../data/users.json`)){
-        const userlist = fs.readFileSync(`${__dirname}/../data/users.json` , 'utf-8')
-        users = [...JSON.parse(userlist)]
-    } else {
-        users = []
-    }
-
-    const existingUser = users.find(usr => usr.email === email);
-
-    if(!existingUser){
-        const user = new User(username , email , password);
-        users.push(user);
-    
-        fs.writeFile(`${__dirname}/../data/users.json` , JSON.stringify(users) , (err) => {
-            if(!err){
-                console.log('хэрэглэгч үүслээ...')
-                res.redirect('/form')
-            } else {
-                console.log(err)
-            }
-        })
-    } else {
-        res.redirect('/form');
-        console.log('Имэйл бүртгэлтэй байна...')
-    }
+route.get('/edit/:id' , (req,res) => {
+    const userId = req.params.id;
+    const user = User.findById(userId);
+    res.render('edit' , {
+        userData: user
+    })
 })
 
 module.exports = route;
