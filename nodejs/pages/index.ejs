@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> <%= pageTitle %> </title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    </head>
-    <body>   
-        <div class="container mx-auto grid grid-cols-3 gap-4">
-            <% for(user of users){ %>
-                <div class="h-56 rounded-xl bg-indigo-400 text-white flex justify-center items-center flex-col relative">
-                    <h3>
-                        <a href="/user/<%= user.id %>"> <%= user.username %> </a>
-                    </h3>
-                    <p><%= user.email %></p>
-                    <div class="absolute right-4 top-4 flex gap-4">
-                        <button class="w-8 h-8 rounded-full text-green-400 border-2 border-green-400 bg-green-400 bg-opacity-30 duration-300 hover:bg-opacity-100 hover:text-white">
-                            <a href="/edit/<%= user.id %>"><i class="fas fa-pen"></i></a>
-                        </button>
-                        <button class="w-8 h-8 rounded-full text-red-400 border-2 border-red-400 bg-red-400 bg-opacity-30 duration-300 hover:bg-opacity-100 hover:text-white">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-            <% } %>
+<%- include('includes/head') %>
+<div class="container mx-auto grid grid-cols-3 gap-4">
+    <% for(user of users){ %>
+        <div class="h-56 rounded-xl bg-indigo-400 text-white flex justify-center items-center flex-col relative">
+            <h3>
+                <a href="/user/<%= user.id %>"> <%= user.username %> </a>
+            </h3>
+            <p><%= user.email %></p>
+            <div class="absolute right-4 top-4 flex gap-4">
+                <button class="w-8 h-8 rounded-full text-green-400 border-2 border-green-400 bg-green-400 bg-opacity-30 duration-300 hover:bg-opacity-100 hover:text-white">
+                    <a href="/edit/<%= user.id %>"><i class="fas fa-pen"></i></a>
+                </button>
+                <form action="/deleteUser/<%= user.id %>" method="post">
+                    <button class="w-8 h-8 rounded-full text-red-400 border-2 border-red-400 bg-red-400 bg-opacity-30 duration-300 hover:bg-opacity-100 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-    </body>
-</html>
+    <% } %>
+</div>
+<%- include('includes/foot') %>

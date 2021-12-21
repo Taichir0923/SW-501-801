@@ -37,4 +37,10 @@ route.post('/edit/:id' , (req, res) => {
     res.redirect('/edit/' + userId)
 })
 
+route.post('/deleteUser/:id' , (req, res) => {
+    const userId = req.params.id;
+    User.findByIdAndDelete(userId);
+    res.redirect('/')
+})
+
 module.exports = route;

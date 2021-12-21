@@ -61,6 +61,26 @@ class User {
         const existingUser = users.find(usr => usr.id === id);
         return existingUser;
     }
+
+    static findByIdAndDelete(id){
+        let users;
+        if(fs.existsSync(`${__dirname}/../data/users.json`)){
+            const userlist = fs.readFileSync(`${__dirname}/../data/users.json` , 'utf-8')
+            users = [...JSON.parse(userlist)]
+        } else {
+            users = []
+        }
+
+        const updatedUsers = users.filter(usr => usr.id !== id)
+        users = updatedUsers;
+        fs.writeFile(`${__dirname}/../data/users.json` , JSON.stringify(users) , (err) => {
+            if(!err){
+                console.log('хэрэглэгч устгагдлаа...')
+            } else {
+                console.log(err)
+            }
+        })
+    }
 }
 
 // methodical
