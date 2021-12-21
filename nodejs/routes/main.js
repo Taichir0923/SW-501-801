@@ -16,7 +16,7 @@ route.get('/form' , (req , res) => {
 route.post('/getUserData' , (req , res) => {
     const {username , email , password} = req.body;
     const user = new User(username , email , password);
-    user.save(email);
+    user.save();
     res.redirect('/form')
 })
 
@@ -26,6 +26,15 @@ route.get('/edit/:id' , (req,res) => {
     res.render('edit' , {
         userData: user
     })
+})
+
+route.post('/edit/:id' , (req, res) => {
+    const userId = req.params.id;
+    const {username , email , password} = req.body;
+    // const 
+    const user = new User(username , email , password);
+    user.save(userId)
+    res.redirect('/edit/' + userId)
 })
 
 module.exports = route;
