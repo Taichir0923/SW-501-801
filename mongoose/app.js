@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 
 // routes
 const homeRouter = require('./routes/homeRouter');
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const authRouter = require('./routes/auth');
 
 app.set('view engine' , 'ejs');
 app.set('views' , 'pages');
@@ -15,8 +16,9 @@ app.set('views' , 'pages');
 app.use(bp.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname , 'public')));
 
-app.use(homeRouter)
-app.use(userRouter)
+app.use(homeRouter);
+app.use(userRouter);
+app.use(authRouter);
 
 
 mongoose.connect(process.env.MONGOOSE_PATH)

@@ -1,6 +1,13 @@
 <%- include('includes/head') %>
-<main class="">
-    <h1>hi there</h1>
-    <p>hello</p>
+<main class="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-col-4">
+    <% if(users.length !== 0){ %>
+        <% for(user of users){ %>
+            <div class="h-64 bg-indigo-500 text-white flex items-center justify-center">
+                <h1><%= user.username %></h1>
+            </div>
+        <% } %>
+    <% } else { %>
+        <h1>Hereglegch baihgui bna</h1>
+    <% } %>
 </main>
 <%- include('includes/foot') %>
