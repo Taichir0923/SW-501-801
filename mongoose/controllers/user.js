@@ -20,3 +20,9 @@ exports.newUser = function(req, res){
         })
         .catch(err => console.log(err))
 }
+
+exports.userPage = (req, res) => {
+    res.render('profile' , {
+        pageTitle: "Narada"
+    })
+}

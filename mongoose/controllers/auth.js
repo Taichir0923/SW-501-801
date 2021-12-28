@@ -15,7 +15,7 @@ exports.postLoginUser = (req, res) => {
             } else {
                 if(user.password === password){
                     console.log('Amjilttai nevterlee');
-                    res.redirect('/')
+                    res.redirect('/user/' + user._id);
                 } else {
                     console.log('email esvel nuuts ug buruu bna.')
                     res.redirect('/login')
