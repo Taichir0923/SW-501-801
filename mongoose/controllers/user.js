@@ -22,7 +22,17 @@ exports.newUser = function(req, res){
 }
 
 exports.userPage = (req, res) => {
-    res.render('profile' , {
-        pageTitle: "Narada"
-    })
+    const userId = req.params.id;
+    User.findById(userId)
+        .then(user => {
+            if(!user){
+                res.redirect('/login');
+            } else {
+                res.render('profile' , {
+                    pageTitle: user.username,
+                    user: user
+                })
+            }
+        })
 }
+
