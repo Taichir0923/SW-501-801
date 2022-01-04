@@ -2,8 +2,16 @@
 <main class="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-col-4">
     <% if(users.length !== 0){ %>
         <% for(user of users){ %>
-            <div class="h-64 bg-indigo-500 text-white flex items-center justify-center">
+            <div class="h-64 bg-indigo-500 relative text-white flex items-center justify-center">
                 <h1><%= user.username %></h1>
+                <div class="absolute bottom-4 right-4 flex gap-3">
+                    <a href="/user/update/<%= user._id %>">
+                        <button class="bg-green-400 text-white py-2 px-4 rounded-md">Засах</button>
+                    </a>
+                    <form action="/user/delete/<%= user._id %>" method="post">
+                        <button type="submit" class="bg-red-400 text-white rounded-md py-2 px-4">Устгах</button>
+                    </form>
+                </div>
             </div>
         <% } %>
     <% } else { %>

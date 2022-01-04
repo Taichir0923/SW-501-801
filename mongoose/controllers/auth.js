@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const bcrypt = require('bcryptjs');
 exports.getLoginUser = (req, res) => {
     res.render('login' , {
         pageTitle: 'Login'
@@ -13,13 +14,16 @@ exports.postLoginUser = (req, res) => {
                 console.log('email esvel nuuts ug buruu bna.')
                 res.redirect('/login')
             } else {
-                if(user.password === password){
-                    console.log('Amjilttai nevterlee');
-                    res.redirect('/user/' + user._id);
-                } else {
-                    console.log('email esvel nuuts ug buruu bna.')
-                    res.redirect('/login')
-                }
+                bcrypt.compare(password , user.password)
+                    .then(matched => {
+                        if(matched){
+                            console.log('Amjilttai nevterlee');
+                            res.redirect('/user/' + user._id);
+                        } else {
+                            console.log('email esvel nuuts ug buruu bna.')
+                            res.redirect('/login')
+                        }
+                    })
             }
         })
 }
