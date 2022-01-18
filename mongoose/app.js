@@ -23,8 +23,8 @@ app.use(authRouter);
 
 mongoose.connect(process.env.MONGOOSE_PATH)
     .then(() => {
-        app.listen(process.env.port , () => {
-            console.log(process.env.port + ' port deer server aslaa')
+        app.listen(process.env.port || 3001, () => {
+            console.log('server aslaa')
         })
     })
     .catch((err) => {
