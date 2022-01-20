@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    
+    <div class="w-full h-screen flex justify-center items-center">
+        <div class="w-[375px] p-4 rounded-xl bg-white">
+            <input class="w-full bg-gray-100 py-2 px-4 rounded-md mb-4" type="text" placeholder="Email" id="email">
+
+            <input class="w-full bg-gray-100 py-2 px-4 rounded-md mb-4" type="password" placeholder="Password" id="password">
+
+            <button class="w-full bg-indigo-500 py-2 px-4 rounded-md text-white" id="btn">Нэвтрэх</button>
+        </div>
+    </div>
+
+    <script>
+        const email = document.querySelector('#email');
+        const password = document.querySelector('#password');
+        const btn = document.querySelector('#btn');
+
+        window.addEventListener('load' , () => {
+            if(localStorage.loggedUser){
+                location.href = './account.html'
+            }
+        })
+        
+        btn.addEventListener('click' , () => {
+            if(
+                email.value.trim() !== '' &&
+                password.value.trim() !== ''
+            ) {
+
+                const formData = {
+                    email: email.value,
+                    password: password.value
+                }
+
+                fetch('http://localhost:3002/login' , {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if(result.payload){
+                        localStorage.setItem('loggedUser' , JSON.stringify(result.payload));
+                        location.href = './account.html'
+                    }
+                    console.log(result);
+                    clearForm();
+                })
+            } else {
+                alert('Invalid input')
+            }
+        })
+
+        function clearForm(){
+            email.value = '';
+            password.value = '';
+        }
+
+        // User login
+        // nevtersen hereglegchiin datag local dr hadgalna. 
+
+        // User logout
+        // local drees nevtersen hereglegchiin data ustgah
+    </script>
+</body>
+</html>

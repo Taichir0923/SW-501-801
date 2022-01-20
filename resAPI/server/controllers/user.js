@@ -29,6 +29,31 @@ class UserController {
                 }
             })
     }
+
+    login(req, res){
+        const {email , password} = req.body;
+        User.findOne({email: email})
+            .then(user => {
+                if(!user){
+                    return res.json({
+                        message: 'Хэрэглэгчийн нэр эсвэл нууц үг буруу байна'
+                    })
+                }
+                bcrypt.compare(password , user.password)
+                    .then(isMathed => {
+                        if(!isMathed){
+                            return res.json({
+                                message: 'Хэрэглэгчийн нэр эсвэл нууц үг буруу байна'
+                            })
+                        }
+
+                        res.json({
+                            message: 'Амжилттай нэвтэрлээ',
+                            payload: user
+                        })
+                    })
+            })
+    }
 }
 
 module.exports = new UserController();

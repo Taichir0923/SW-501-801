@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        #layer::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #00b3ff;
+            right: 19px;
+        }
+        #layer {
+            opacity: 0;
+            visibility: hidden;
+            transition: all .4s ease;
+        }
+
+        .open {
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: popup .4s ease 1;
+        }
+
+        @keyframes popup {
+            0% {
+                transform: scale(0.8);
+            }
+
+            25% {
+                transform: scale(1.2);
+            }
+
+            50% {
+                transform: scale(0.9);
+            }
+
+            75% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#1d1d1d]">
+    <header class="w-full flex border-b border-[#393939] items-center justify-between pl-4 bg-[rgba(34,34,34,.8)]">
+        <img class="w-[200px]" src="https://www.mnfansubs.net/static/webs/mnfansubs/assets/logo-white.png" alt="">
+        <div class="flex text-[#999]">
+            <div class="w-[50px] h-[60px] border-l border-[#393939] flex items-center justify-center">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="w-[50px] h-[60px] border-l border-[#393939] flex items-center justify-center">
+                <i class="fas fa-film"></i>
+            </div>
+            <div id='bars' class="w-[50px] h-[60px] border-l border-[#393939] flex items-center justify-center relative">
+                <i id="barsIcon" class="fas fa-bars"></i>
+                <div id="layer" class="absolute top-full w-[350px] h-96 bg-[#161616] right-0 flex flex-col justify-between">
+                    <div class="h-[60px] bg-[#00b3ff] w-full"></div>
+                    <div id="logout" class="w-full py-4 px-6">
+                        Системээс гарах
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const layer = document.querySelector('#layer');
+        const logout = document.querySelector('#logout');
+
+        window.addEventListener('load' , () => {
+            if(!localStorage.loggedUser){
+                location.href = './login.html'
+            }
+        })
+
+        document.addEventListener('click' , e => {
+            if(e.target.id == 'bars' || e.target.id == 'barsIcon'){
+                layer.classList.toggle('open')
+            }
+        })
+
+        logout.addEventListener('click' , () => {
+            localStorage.removeItem('loggedUser');
+            location.href = './login.html';
+        })
+    </script>
+</body>
+</html>
