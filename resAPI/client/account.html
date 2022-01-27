@@ -30,6 +30,7 @@
             opacity: 1 !important;
             visibility: visible !important;
             animation: popup .4s ease 1;
+            z-index: 999;
         }
 
         @keyframes popup {
@@ -54,6 +55,19 @@
             }
         }
     </style>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+                transparentWhite: 'rgba(255 , 255 , 255 , 0)',
+                transparentBlack: 'rgba(0, 0, 0, 0.7)'
+              }
+            }
+          }
+        }
+    </script>
 </head>
 <body class="bg-[#1d1d1d]">
     <header class="w-full flex border-b border-[#393939] items-center justify-between pl-4 bg-[rgba(34,34,34,.8)]">
@@ -76,16 +90,42 @@
             </div>
         </div>
     </header>
+    <main class="w-full my-6">
+        <div id="container" class="container grid mx-auto gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            
+        </div>
+    </main>
 
     <script>
         const layer = document.querySelector('#layer');
         const logout = document.querySelector('#logout');
+        const container = document.querySelector('#container');
 
         window.addEventListener('load' , () => {
             if(!localStorage.loggedUser){
                 location.href = './login.html'
             }
+            fetch('http://localhost:3002/animes')
+                .then(res => res.json())
+                .then(animes => {
+                    updateUi(animes);
+                })
+                .catch(err => console.log(err))
         })
+
+        function updateUi(arr){
+            container.innerHTML = '';
+            arr.forEach(anime => {
+                container.insertAdjacentHTML('afterbegin' , `
+                    <div class="h-64 border border-[#393939] rounded-xl overflow-hidden relative">
+                        <img class="w-full h-full object-cover" src=${anime.thumbnail_url} />
+                        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparentWhite to-transparentBlack flex items-end p-4 text-white duration-300 hover:text-[#00b3ff]">
+                            <p class="cursor-pointer">${anime.title}</p>
+                        </div>
+                    </div>
+                `)
+            })
+        }
 
         document.addEventListener('click' , e => {
             if(e.target.id == 'bars' || e.target.id == 'barsIcon'){
