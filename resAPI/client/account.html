@@ -102,7 +102,7 @@
         const container = document.querySelector('#container');
 
         window.addEventListener('load' , () => {
-            if(!localStorage.loggedUser){
+            if(!localStorage.token){
                 location.href = './login.html'
             }
             fetch('http://localhost:3002/animes')

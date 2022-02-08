@@ -1,5 +1,6 @@
 const User = require('../model/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 class UserController {
     register(req, res){
         const {username , password , email} = req.body;
@@ -47,9 +48,14 @@ class UserController {
                             })
                         }
 
+                        const token = jwt.sign({
+                            user: user
+                        } , process.env.privatekey)
+
                         res.json({
                             message: 'Амжилттай нэвтэрлээ',
-                            payload: user
+                            token: token,
+                            result: user._id
                         })
                     })
             })

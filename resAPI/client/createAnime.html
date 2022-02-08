@@ -43,7 +43,7 @@
                 fetch('http://localhost:3002/new-anime' , {
                     method: 'POST',
                     headers: {
-                        userid: JSON.parse(localStorage['loggedUser'])._id,
+                        'authorization': "Bearer " + localStorage.token,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formData)
@@ -69,6 +69,8 @@
 
         // User logout
         // local drees nevtersen hereglegchiin data ustgah
+
+        // JSON Web Token
     </script>
 </body>
 </html>
