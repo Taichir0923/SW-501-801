@@ -50,8 +50,16 @@
                 })
                 .then(res => res.json())
                 .then(result => {
-                    console.log(result);
+                    if(result.errMessage){
+                        throw new Error(result.errMessage)
+                    }
+                    console.log(result)
                     clearForm();
+                })
+                .catch(err => {
+                    alert(err.message);
+                    localStorage.clear();
+                    location.href = './login.html'
                 })
             } else {
                 alert('Invalid input')

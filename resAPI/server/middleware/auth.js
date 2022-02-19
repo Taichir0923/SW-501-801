@@ -6,16 +6,20 @@ const jwt = require('jsonwebtoken');
 class Check {
     isAuthenticated(req , res , next){
         const token = req.headers.authorization.split(' ')[1];
-        const decoded = jwt.verify(token , process.env.privatekey);
         
-        if(decoded){
-            req.user = decoded.user;
-            next();
-        } else {
-            res.json({
-                message: 'Ta nevtreegui bna.'
-            })
-        }
+        jwt.verify(token , process.env.privatekey , (err , decoded) => {
+            if(!err){
+                if(decoded){
+                    req.user = decoded.user;
+                    next();
+                }
+            } else {
+                res.json({
+                    errMessage: 'Session expired!'
+                })
+            }
+        });
+        
     }
 }
 

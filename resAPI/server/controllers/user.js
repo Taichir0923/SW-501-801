@@ -50,7 +50,9 @@ class UserController {
 
                         const token = jwt.sign({
                             user: user
-                        } , process.env.privatekey)
+                        } , process.env.privatekey , {
+                            expiresIn: '1h'
+                        })
 
                         res.json({
                             message: 'Амжилттай нэвтэрлээ',
